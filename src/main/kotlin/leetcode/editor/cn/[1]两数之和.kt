@@ -43,7 +43,8 @@
 //<div><div>Related Topics</div><div><li>数组</li><li>哈希表</li></div></div><br><div><li>👍 12098</li><li>👎 0</li></div>
 
 //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
+class Solution1 {
+    /* 方案一
     fun twoSum(nums: IntArray, target: Int): IntArray {
         val map = hashMapOf<Int, Int>()
         nums.forEachIndexed { index, value ->
@@ -52,9 +53,35 @@ class Solution {
         nums.forEachIndexed { index, value ->
             val dif = target - value
             val otherIndex = map[dif]
-            if (otherIndex != null) {
+            if (otherIndex != null && index != otherIndex) {
                 return intArrayOf(index, otherIndex)
             }
+        }
+        throw Throwable("Not found")
+    }
+     */
+
+    /* 方案二
+    fun twoSum(nums: IntArray, target: Int): IntArray {
+        val map = hashMapOf<Int, Int>()
+        nums.forEachIndexed { index, value ->
+            if (map.containsKey(target - value)) {
+                return intArrayOf(index, map[target - value]!!)
+            }
+            map[value] = index
+        }
+        throw Throwable("Not found")
+    }
+     */
+
+    // 方案三
+    fun twoSum(nums: IntArray, target: Int): IntArray {
+        val map = hashMapOf<Int, Int>()
+        nums.forEachIndexed { index, value ->
+            if (map.containsKey(value)) {
+                return intArrayOf(index, map[value]!!)
+            }
+            map[target - value] = index
         }
         throw Throwable("Not found")
     }
